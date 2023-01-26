@@ -177,33 +177,7 @@ async function createMap() {
 
   //   console.log(network);
 }
-
-const nodeShape = ref("");
-
-let X = `
-      (node, ctx, globalScale) => {
-        const label = node.name;
-        const fontSize = 12 / globalScale;
-        const textWidth = ctx.measureText(label).width;
-        const bckgDimensions = [textWidth, fontSize].map(
-          (n) => n + fontSize * 0.2
-        ); // some padding
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-        ctx.fillRect(
-          node.x - bckgDimensions[0] / 2,
-          node.y - bckgDimensions[1] / 2,
-          ...bckgDimensions
-        );
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = node.color;
-        ctx.fillText(label, node.x, node.y);
-        node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
-      }`
-
-      nodeShape.value = X
     
-
 onMounted(() => {
  
 })
