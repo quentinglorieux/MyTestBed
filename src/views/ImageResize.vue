@@ -44,7 +44,7 @@ function onProgress(progress) {
     @progress="onProgress"
     urlEndpoint="https://ik.imagekit.io/quentinglx"
     publicKey="public_QoAnOszxzry0gVchb2sz3NhXi+w="
-    authenticationEndpoint="http://localhost:3000/secret"
+    authenticationEndpoint="https://auth.rubidiumweb.eu/secret"
   />
 
 
