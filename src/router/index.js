@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import WordCloud from '../views/WordCloud.vue'
+import ImageResize from '../views/ImageResize.vue'
 
 
 const routes = [
@@ -13,6 +14,11 @@ const routes = [
     path: '/wordcloud',
     name: 'WordCloud',
     component: WordCloud
+  },
+  {
+    path: '/imageresize',
+    name: 'ImageResize',
+    component: ImageResize
   },
 ]
 const router = createRouter({

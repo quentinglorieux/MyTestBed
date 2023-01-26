@@ -16,6 +16,7 @@
     "graphology": "^0.25.1",
     "graphology-communities-louvain": "^2.0.1",
     "graphology-layout": "^0.6.1",
+    "imagekit-vue3": "^0.1.4",
     "lodash": "^4.17.21",
     "pinia": "^2.0.28",
     "roboto-fontface": "*",
