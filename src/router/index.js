@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import Network from '../views/Network.vue'
 import WordCloud from '../views/WordCloud.vue'
 import ImageResize from '../views/ImageResize.vue'
 
@@ -11,12 +12,17 @@ const routes = [
     component: Home
   },
   {
+    path: '/network',
+    name: 'Network',
+    component: Network
+  },
+  {
     path: '/wordcloud',
     name: 'WordCloud',
     component: WordCloud
   },
   {
-    path: '/imageresize',
+    path: '/insta',
     name: 'ImageResize',
     component: ImageResize
   },
