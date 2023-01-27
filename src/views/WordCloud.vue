@@ -4,7 +4,7 @@ import { ref, watch } from "vue";
 import { debounce } from "lodash";
 import axios from "axios";
 
-const openAlexID = ref("A2479014094");
+const openAlexID = ref("");
 const oaAutoComplete = ref("");
 const resultsArray = ref([]);
 const concepts = ref([]);

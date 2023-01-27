@@ -16,7 +16,7 @@ import Sigma from "sigma";
 const graph = new Graph();
 // import circular from "graphology-layout/circular";
 
-const openAlexID = ref("A2479014094");
+const openAlexID = ref("");
 const oaAutoComplete = ref("");
 const publis = ref(null);
 const resultsArray = ref([]);
