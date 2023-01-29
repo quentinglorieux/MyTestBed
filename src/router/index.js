@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Network from '../views/Network.vue'
 import WordCloud from '../views/WordCloud.vue'
 import ImageResize from '../views/ImageResize.vue'
+import QRcode from '../views/QRcode.vue'
 
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
     path: '/insta',
     name: 'ImageResize',
     component: ImageResize
+  },
+  {
+    path: '/qrcode',
+    name: 'QRcode',
+    component: QRcode
   },
 ]
 const router = createRouter({

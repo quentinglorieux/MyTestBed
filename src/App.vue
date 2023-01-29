@@ -7,7 +7,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <RouterLink to="/">Home</RouterLink> - 
     <RouterLink to="/network">Network</RouterLink> - 
     <RouterLink to="/wordcloud">WordCloud</RouterLink> - 
-    <RouterLink to="/insta">ImageResize</RouterLink>
+    <RouterLink to="/insta">ImageResize</RouterLink> - 
+    <RouterLink to="/qrcode">QR Code</RouterLink>
   </div>
   <RouterView/>
 </template>

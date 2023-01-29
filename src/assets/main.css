@@ -2,3 +2,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+    font-size: 36px;
+    color: rgb(63, 111, 160);
+}
+
+h2 {
+    font-size: 28 px;
+    color: rgb(42, 77, 111);
+}
+
+h3 {
+    font-size: 20px;
+    color: rgb(19, 36, 52);
+}
+
+.app {
+    max-width: 90%;
+    margin: auto;
+    padding-top: 10px;
+}
