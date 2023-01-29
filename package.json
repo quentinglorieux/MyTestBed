@@ -1,6 +1,6 @@
 {
-  "name": "opengraphalex",
-  "version": "0.0.1",
+  "name": "RubidiumTestBed",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "serve": "vite preview",
