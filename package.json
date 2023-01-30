@@ -21,6 +21,7 @@
     "pinia": "^2.0.28",
     "qrcode.vue": "^3.3.3",
     "roboto-fontface": "*",
+    "saas": "^1.0.0",
     "sigma": "^2.4.0",
     "vue": "^3.2.45",
     "vue-force-graph": "^0.1.2",
