@@ -66,7 +66,7 @@ async function createWordCloud(id) {
 
  <div class="full">
     <h1 class="pr">The Cloud of  {{ pi  }}</h1>
-    <h2 class="pr">Find OpenAlex.org ID</h2>
+    <!-- <h2 class="pr">Find OpenAlex.org ID</h2> -->
     <div class="container">
     Enter your <input class="inputname" v-model="oaAutoComplete" placeholder="first and last name" />
     <div v-if="true">

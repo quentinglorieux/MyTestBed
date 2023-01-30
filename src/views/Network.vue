@@ -237,15 +237,15 @@ function onEngineStop() {
   </div>
 </template>
 
-<style scope>
+<style>
 
 .result:hover{
-  background-color: rgb(143, 252, 145);
+  background-color: rgb(143, 194, 252);
   font-weight: 500;
 }
 
 .result:active{
-  background-color: rgb(29, 246, 0);
+  background-color: rgb(113, 158, 255);
   font-weight: 500;
 }
 
@@ -256,7 +256,7 @@ function onEngineStop() {
 .pr{padding-left: 20px;}
 
 .container{
-  background-color: rgb(210, 255, 211);
+  background-color: rgb(211, 231, 240);
   padding: 20px;
 }
 .graph {

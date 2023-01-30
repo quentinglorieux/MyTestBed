@@ -5,17 +5,18 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   
 
-<div class="layout-overlay block">
+<div class="layout-overlay flex">
+
   <div class="layout-sidebar 
-              flex flex-column text-2xl text-teal-700 py-3 text-center">
+              flex flex-column text-2xl text-teal-700  text-center">
     <RouterLink to="/">Home</RouterLink> -
     <RouterLink to="/network">Network</RouterLink> -
     <RouterLink to="/wordcloud">WordCloud</RouterLink> -
     <RouterLink to="/insta">ImageResize</RouterLink> -
     <RouterLink to="/qrcode">QR Code</RouterLink>
-     </div>
+  </div>
 
-  <div class="layout-main-container mx-72 ">
+  <div class="layout-main-container ">
     <div class="layout-main bg-blue-100">  <RouterView /> </div>
   </div>
 

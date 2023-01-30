@@ -11,7 +11,6 @@ loadFonts();
 const app = createApp(App);
 
 
-app.use(vuetify)
-  .use(router)
+app.use(vuetify).use(router)
 
 app.mount("#app");

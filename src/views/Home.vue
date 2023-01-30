@@ -1,5 +1,4 @@
 <template>
-   <div class=" flex bg-blue-100">
-    <div class="mx-auto my-auto text-4xl"> Rubidium Web - Vue.dev </div>
-   </div> 
+   <!-- <div class="flex flex-col  bg-blue-200 content-center "> -->
+    <div class="py-20 text-center text-4xl "> Rubidium Web - Vue.dev </div>
 </template>

@@ -1,30 +1,39 @@
-<template claa="app">
+<template>
 
 <div class="app">
     <h1> QR Code Generator</h1>
     <h3>Enter your parameters: </h3> 
-
-    <v-text-field class="w-1/3"
-            v-model="data"
-            label="Your data here"
-          ></v-text-field>
+  <div class="w-2/3 flex">
 
     
+          <v-container>
+      <v-row>
+      
+          <v-text-field
+          v-model="data"
+            label="Your data here"
+          ></v-text-field>
+        <v-slider
+    v-model=size
+    :min="100"
+    :max="500"
+    :step="50"
+    color="orange"
+    thumb-label
+  ></v-slider>
 
-  <v-card class="w-1/3">
-    <v-card-text>
-      <v-slider
-        v-model="size"
-        step="10"
-        min="50"
-        max="500"
-      ></v-slider>
-    </v-card-text>
-  </v-card>
+      </v-row>
+    </v-container>
 
-   
 
-    <qrcode-vue :value="data" :size="size" level="H" />
+
+
+</div>
+
+
+
+
+    <qrcode-vue :value="data" :size=size level="H" />
 </div>
 
 </template>
@@ -35,8 +44,7 @@ import { ref } from "vue";
 import QrcodeVue from 'qrcode.vue'
 
 const data=ref('');
-const size2=ref('20');
-const size=ref('200');
+const size=ref(200);
 const message=ref('');
 
 </script>
