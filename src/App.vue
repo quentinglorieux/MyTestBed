@@ -13,7 +13,8 @@ import { RouterLink, RouterView } from "vue-router";
     <RouterLink to="/network">Network</RouterLink> -
     <RouterLink to="/wordcloud">WordCloud</RouterLink> -
     <RouterLink to="/insta">ImageResize</RouterLink> -
-    <RouterLink to="/qrcode">QR Code</RouterLink>
+    <RouterLink to="/qrcode">QR Code</RouterLink> -
+    <RouterLink to="/galaxie">Galaxie</RouterLink>
   </div>
 
   <div class="layout-main-container ">

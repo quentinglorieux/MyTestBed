@@ -4,6 +4,7 @@ import Network from '../views/Network.vue'
 import WordCloud from '../views/WordCloud.vue'
 import ImageResize from '../views/ImageResize.vue'
 import QRcode from '../views/QRcode.vue'
+import Galaxie from '../views/Galaxie.vue'
 
 
 const routes = [
@@ -31,6 +32,11 @@ const routes = [
     path: '/qrcode',
     name: 'QRcode',
     component: QRcode
+  },
+  {
+    path: '/galaxie',
+    name: 'Galaxie',
+    component: Galaxie
   },
 ]
 const router = createRouter({
