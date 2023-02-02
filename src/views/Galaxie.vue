@@ -1,23 +1,22 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
  //import localData from "../assets/data.json";
 
 const body = ref("");
- //const data = ref(localData.poste);
 const data=ref();
 const headers =ref([]);
 
-
- //  const url = "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/ListesPostesPublies/Emplois_publies_TrieParCorps.html";
-    // const url = "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/ListesPostesPublies/Emplois_prepublies_TrieParCorps.html";
-  const pre = ref(false);
-//   const url = ref(pre ? "https://scrap.rubidiumweb.eu/" : "https://scrap.rubidiumweb.eu/pre")
   
+  const pre = ref();
+  const loading = ref(false);
 
-  function fetchGalaxie(){
-    console.log(pre.value)
-    const url = ref(pre.value ? "https://scrap.rubidiumweb.eu/" : "https://scrap.rubidiumweb.eu/pre")
-    console.log(url.value)
+  fetchGalaxie(false);
+
+  watch(pre , (newPre) => fetchGalaxie(newPre) ) 
+
+  function fetchGalaxie(x){
+    loading.value = true;
+    const url = ref(x ?  "https://scrap.rubidiumweb.eu/pre" : "https://scrap.rubidiumweb.eu/" )
     fetch(url.value, {
     method: "GET",
     headers: {},
@@ -28,17 +27,15 @@ const headers =ref([]);
     .then((res) => parseHTML(res))
     .catch(console.error.bind(console));
 }
-fetchGalaxie()
+
 
 
 function parseHTML(body) {
   var div = document.createElement("div");
   div.innerHTML = body;
   data.value = parsing(body);
-  console.log(data.value)
+  loading.value = false;
 }
-
-// console.log(data.value)
 
 function parsing(body) {
   const doc = document.createElementNS("mydoc", "body");
@@ -63,8 +60,9 @@ function parsing(body) {
         fixed   : true,
         });
   });
-    headers.value.splice(0, 1 , headers.value[0]); // invert ref and etablissement
+    headers.value[0]=  headers.value.splice(1, 1,  headers.value[0])[0]; // invert ref and etablissement
     headers.value[1].width=350;  
+    // console.log(headers.value)
         
 
   var rows = doc.querySelectorAll("table.tab tbody tr");
@@ -84,7 +82,6 @@ function parsing(body) {
   var myObj = {
     poste: myRows.slice(1),
   };
-  console.log(myRows)
   return myRows.slice(1);
 }
 
@@ -96,16 +93,15 @@ const sortBy = ref([{ key: 'section', order: 'asc' }])
 
 
 <template>
- 
 
   <!-- Vuetify Version -->
-
-  <div class="flex justify-center p-1 bg-gradient-to-r from-fuchsia-900 to-fuchsia-400">
+  {{  headers }}
+  <div  class="flex justify-center p-1 bg-gradient-to-r from-fuchsia-900 to-fuchsia-400">
     <img class="w-80" src="@/assets/galaxie-min.png"/>
   </div>
-  <h2 class="p-3 font-bold"> {{ !pre ? "Postes Publiés" : "Postes Pré-publiés" }} </h2>
+  <h2 class="p-3 font-bold"> {{ pre ? "Postes Pré-publiés" : "Postes Publiés" }} </h2>
   <div class="flex "> 
-   
+
     <v-text-field class="w-1/3 pb-2"
         v-model="search"
         append-icon="mdi-magnify"
@@ -114,14 +110,19 @@ const sortBy = ref([{ key: 'section', order: 'asc' }])
         hide-details
       ></v-text-field> 
        <v-switch 
-       @click="fetchGalaxie"
        v-model="pre"
        class="pl-10" 
        label="Publiés / Prépubliés"> </v-switch> 
       
-    </div>
+    </div>  
+    <div v-if="loading" class="flex justify-center p-4"> <v-progress-circular
+      indeterminate
+      color="primary"
+    ></v-progress-circular></div>
+  
 
   <v-data-table
+    v-if="!loading"
     height="800px"
     v-model:sort-by="sortBy"
     items-per-page=-1
