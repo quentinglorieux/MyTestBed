@@ -4,8 +4,9 @@ import localData from "../assets/data.json";
 
 const body = ref("");
 const data = ref(localData.poste);
+const headers =ref([]);
 
-var source = "local";
+var source = "distant";
 
 if (source == "distant") {
   const url =
@@ -28,7 +29,6 @@ function parseHTML(body) {
   if (source == "distant") {
     data.value = p2(body);
   }
-  console.log(data.value);
 }
 
 function p2(body) {
@@ -36,20 +36,41 @@ function p2(body) {
   doc.innerHTML = body;
   var myRows = [{}];
   var headersText = [];
+  var headersKey = [];
 
   var heads = doc.querySelectorAll("table.tab tbody tr th b");
-  heads.forEach((head) => {
-    headersText.push(head.innerHTML.replace(" ", "_"));
+  heads.forEach((head, index) => {
+    var lkey = head.innerHTML.replaceAll(" ", "_").toLocaleLowerCase()
+    .replace(new RegExp(/[èéêë]/g),"e").replace("ô","o").replace("°","");
+    var lname = head.innerHTML;
+
+    headersKey.push(lkey);
+    headersText.push(lname);
+
+    if ( [ 'reference_galaxie','etablissement',  'article', 'corps', 'chaire', 'section', 'profil', 'localisation'].includes(lkey))
+   headers.value.push( {
+        title   : lname,
+        key     : lkey,
+        });
   });
+  headers.value.splice(0, 0, headers.value[1]);
+headers.value[1].width=350
+
+
+
+
+
+
+ 
 
   var rows = doc.querySelectorAll("table.tab tbody tr");
   rows.forEach((row, index) => {
     var cellIndex = 0;
     if (index) {
-      myRows.push({ [headersText[cellIndex]]: "" });
+      myRows.push({ [headersKey[cellIndex]]: "" });
       for (let cell of row.cells) {
         Object.assign(myRows[index], {
-          [headersText[cellIndex]]: cell.innerHTML,
+          [headersKey[cellIndex]]: cell.innerHTML,
         });
         cellIndex += 1;
       }
@@ -61,11 +82,70 @@ function p2(body) {
   };
   return myRows.slice(1);
 }
+
+const sortBy = ref([{ key: 'section', order: 'asc' }])
+const search =ref('')
 </script>
 
 
 <template>
-  <v-table fixed-header height="500px">
+ 
+ <!-- {{ headers }} -->
+  <!-- Vuetify Version -->
+
+  <div class="flex justify-center p-1 bg-gradient-to-r from-fuchsia-900 to-fuchsia-400">
+    <img class="w-80" src="@/assets/galaxie-min.png"/>
+  </div>
+
+  <v-text-field class="w-1/3 pb-2"
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+
+
+  <v-data-table
+    height="800px"
+    v-model:sort-by="sortBy"
+    items-per-page=-1
+    :search="search"
+    :headers="headers"
+    :items="data"
+    class="elevation-1"
+    fixed-header=true
+  >
+  <template v-slot:item="{ item }">
+    
+      <tr>
+        <!-- <td>{{ item.columns.uai }}</td> -->
+        
+        <td>
+          <v-btn
+         color="blue-grey"
+         density="compact"
+         prepend-icon="mdi-file-pdf-box"
+        ><div class="text-center" v-html="item.columns.reference_galaxie"> </div> </v-btn>
+     </td>
+     <td>{{ item.columns.etablissement }}</td>
+        <td>{{ item.columns.article }}</td>
+        <td>{{ item.columns.corps }}</td>
+        <td>{{ item.columns.chaire }}</td>
+        <td>{{ item.value.section }} <span v-if="item.value.section2"> - </span>
+            {{ item.value.section2 }} <span v-if="item.value.section3"> - </span>
+            {{ item.value.section3 }}</td>
+        <td>{{ item.columns.profil }}</td>
+        <td>{{ item.columns.localisation }}</td>
+      </tr>
+    </template>
+</v-data-table>
+
+
+
+
+  <!-- Vuetify using v-table -->
+  <!-- <v-table fixed-header height="500px">
     <thead>
       <tr>
         <th class="text-left">UAI</th>
@@ -78,18 +158,19 @@ function p2(body) {
     </thead>
     <tbody>
       <tr v-for="post in data" :key="post.UAI">
-        <td>{{ post.UAI }}</td>
-        <td><div v-html="post.Référence_GALAXIE"></div></td>
-        <td>{{ post.Etablissement }}</td>
-        <td>{{ post.Corps }}</td>
-        <td>{{ post.Article }}</td>
+        <td>{{ post.uai }}</td>
+        <td><div v-html="post.reference_galaxie"></div> </td>
+        <td>{{ post.etablissement }}</td>
+        <td>{{ post.corps }}</td>
+        <td>{{ post.article }}</td>
         <td>
-          {{ post.Section }} <span v-if="post.Section2"> - </span>
-          {{ post.Section2 }} <span v-if="post.Section3"> - </span>
-          {{ post.Section3 }}
+          {{ post.section }} <span v-if="post.Section2"> - </span>
+          {{ post.section2 }} <span v-if="post.Section3"> - </span>
+          {{ post.section3 }}
         </td>
       </tr>
     </tbody>
-  </v-table>
+  </v-table> -->
+
 
 </template>

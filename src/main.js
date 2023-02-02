@@ -5,8 +5,11 @@ import { loadFonts } from "./plugins/webfontloader";
 import router from "./router/index.js";
 import PrimeVue from 'primevue/config';
 
+// PrimeVue
 // import Card from 'primevue/card';
 // import Button from 'primevue/button';
+
+
 
 import './assets/main.css'
 import 'primevue/resources/themes/saga-blue/theme.css'       //theme
@@ -16,8 +19,12 @@ loadFonts();
 
 const app = createApp(App);
 
-app.use(PrimeVue).use(vuetify).use(router);
+app.use(router)
+    .use(vuetify)
+    // .use(PrimeVue)
 
+
+// PrimeVue
 // app.component('Button', Button)
 // app.component('Card', Card)
 
