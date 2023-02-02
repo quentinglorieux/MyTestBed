@@ -1,17 +1,24 @@
 <script setup>
 import { ref } from "vue";
-import localData from "../assets/data.json";
+ //import localData from "../assets/data.json";
 
 const body = ref("");
-const data = ref(localData.poste);
+ //const data = ref(localData.poste);
+const data=ref();
 const headers =ref([]);
 
-var source = "distant";
 
-if (source == "distant") {
-  const url =
-    "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/ListesPostesPublies/Emplois_publies_TrieParCorps.html";
-  fetch("http://localhost:3000    ", {
+ //  const url = "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/ListesPostesPublies/Emplois_publies_TrieParCorps.html";
+    // const url = "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/ListesPostesPublies/Emplois_prepublies_TrieParCorps.html";
+  const pre = ref(false);
+//   const url = ref(pre ? "https://scrap.rubidiumweb.eu/" : "https://scrap.rubidiumweb.eu/pre")
+  
+
+  function fetchGalaxie(){
+    console.log(pre.value)
+    const url = ref(pre.value ? "https://scrap.rubidiumweb.eu/" : "https://scrap.rubidiumweb.eu/pre")
+    console.log(url.value)
+    fetch(url.value, {
     method: "GET",
     headers: {},
     mode: "cors",
@@ -21,17 +28,19 @@ if (source == "distant") {
     .then((res) => parseHTML(res))
     .catch(console.error.bind(console));
 }
+fetchGalaxie()
+
 
 function parseHTML(body) {
   var div = document.createElement("div");
   div.innerHTML = body;
-
-  if (source == "distant") {
-    data.value = p2(body);
-  }
+  data.value = parsing(body);
+  console.log(data.value)
 }
 
-function p2(body) {
+// console.log(data.value)
+
+function parsing(body) {
   const doc = document.createElementNS("mydoc", "body");
   doc.innerHTML = body;
   var myRows = [{}];
@@ -47,21 +56,16 @@ function p2(body) {
     headersKey.push(lkey);
     headersText.push(lname);
 
-    if ( [ 'reference_galaxie','etablissement',  'article', 'corps', 'chaire', 'section', 'profil', 'localisation'].includes(lkey))
+    if ( [ 'etablissement', 'reference_galaxie', 'article', 'corps', 'chaire', 'section', 'profil', 'localisation'].includes(lkey))
    headers.value.push( {
         title   : lname,
         key     : lkey,
+        fixed   : true,
         });
   });
-  headers.value.splice(0, 0, headers.value[1]);
-headers.value[1].width=350
-
-
-
-
-
-
- 
+    headers.value.splice(0, 1 , headers.value[0]); // invert ref and etablissement
+    headers.value[1].width=350;  
+        
 
   var rows = doc.querySelectorAll("table.tab tbody tr");
   rows.forEach((row, index) => {
@@ -80,31 +84,42 @@ headers.value[1].width=350
   var myObj = {
     poste: myRows.slice(1),
   };
+  console.log(myRows)
   return myRows.slice(1);
 }
 
-const sortBy = ref([{ key: 'section', order: 'asc' }])
+// 
 const search =ref('')
+const sortBy = ref([{ key: 'section', order: 'asc' }])
+
 </script>
 
 
 <template>
  
- <!-- {{ headers }} -->
+
   <!-- Vuetify Version -->
 
   <div class="flex justify-center p-1 bg-gradient-to-r from-fuchsia-900 to-fuchsia-400">
     <img class="w-80" src="@/assets/galaxie-min.png"/>
   </div>
-
-  <v-text-field class="w-1/3 pb-2"
+  <h2 class="p-3 font-bold"> {{ !pre ? "Postes Publiés" : "Postes Pré-publiés" }} </h2>
+  <div class="flex "> 
+   
+    <v-text-field class="w-1/3 pb-2"
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
         single-line
         hide-details
-      ></v-text-field>
-
+      ></v-text-field> 
+       <v-switch 
+       @click="fetchGalaxie"
+       v-model="pre"
+       class="pl-10" 
+       label="Publiés / Prépubliés"> </v-switch> 
+      
+    </div>
 
   <v-data-table
     height="800px"
@@ -114,12 +129,10 @@ const search =ref('')
     :headers="headers"
     :items="data"
     class="elevation-1"
-    fixed-header=true
   >
   <template v-slot:item="{ item }">
     
       <tr>
-        <!-- <td>{{ item.columns.uai }}</td> -->
         
         <td>
           <v-btn
