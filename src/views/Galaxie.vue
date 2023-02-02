@@ -95,7 +95,7 @@ const sortBy = ref([{ key: 'section', order: 'asc' }])
 <template>
 
   <!-- Vuetify Version -->
-  {{  headers }}
+  <!-- {{  headers }} -->
   <div  class="flex justify-center p-1 bg-gradient-to-r from-fuchsia-900 to-fuchsia-400">
     <img class="w-80" src="@/assets/galaxie-min.png"/>
   </div>
