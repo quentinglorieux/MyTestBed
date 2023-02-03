@@ -14,7 +14,7 @@ import { RouterLink, RouterView } from "vue-router";
     <RouterLink to="/wordcloud">WordCloud</RouterLink> -
     <RouterLink to="/insta">ImageResize</RouterLink> -
     <RouterLink to="/qrcode">QR Code</RouterLink> -
-    <RouterLink to="/galaxie">Galaxie</RouterLink>
+    <div>  <RouterLink to="/galaxie">GalMap</RouterLink> / <RouterLink to="/galaxie2">Galaxie2</RouterLink> </div>
   </div>
 
   <div class="layout-main-container ">
@@ -24,6 +24,8 @@ import { RouterLink, RouterView } from "vue-router";
 </div>
 
 </template>
+
+
 
 <!-- 
 'layout-overlay': this.layoutMode === 'overlay',
