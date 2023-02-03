@@ -6,7 +6,7 @@ import ImageResize from '../views/ImageResize.vue'
 import QRcode from '../views/QRcode.vue'
 import Galaxie from '../views/Galaxie.vue'
 import Galaxie2 from '../views/Galaxie2.vue'
-import Olive from '../views/Olive.vue'
+
 
 const routes = [
   {
@@ -40,9 +40,9 @@ const routes = [
     component: Galaxie
   },
   {
-    path: '/galaxie2',
-    name: 'Galaxie2',
-    component: Galaxie2
+    path: '/mapaxie',
+    name: 'Mapaxie',
+    component: Mapaxie
   },
   {
     path: '/olive',
