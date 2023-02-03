@@ -15,6 +15,7 @@ import { RouterLink, RouterView } from "vue-router";
     <RouterLink to="/insta">ImageResize</RouterLink> -
     <RouterLink to="/qrcode">QR Code</RouterLink> -
     <div>  <RouterLink to="/galaxie">GalMap</RouterLink> / <RouterLink to="/galaxie2">Galaxie2</RouterLink> </div>
+    <RouterLink to="/olive">olive</RouterLink> -
   </div>
 
   <div class="layout-main-container ">
